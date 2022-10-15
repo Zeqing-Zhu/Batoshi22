@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect, Button } from 'react'
+import { MiningRigList } from "./Pages/MiningRigList"
 
 function App() {
 
@@ -10,7 +11,7 @@ function App() {
   }
 
   function requestMinerInfo(){
-    fetch("http://127.0.0.1:5000/data",{
+    fetch("/data",{
       'methods' : 'GET',
       headers: {
         'Content-Type' : 'application/json'
@@ -25,28 +26,6 @@ function App() {
     )
 
   }
-/*
-  useEffect (() => {
-    fetch("http://127.0.0.1:5000/data",{
-      'methods' : 'GET',
-      headers: {
-        'Content-Type' : 'application/json'
-      }
-    }).then(
-      res => res.json()
-    ).then(
-      data => {
-        setData(data)
-        console.log(data)
-      }
-    )
-
-
-
-  }, [])
-  */
-
-
 
 
 
@@ -79,7 +58,10 @@ function App() {
         >
           Try BATOSHI
         </a>
-       
+
+        <MiningRigList/>
+
+      
 
       
 
