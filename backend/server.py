@@ -1,38 +1,21 @@
-
-# Import flask and datetime module for showing date and time
 from flask import Flask
-import datetime
-from flask_cors import CORS
-  
-x = datetime.datetime.now()
-  
-# Initializing flask app
+from extension import db
+from models import Mining
+
 app = Flask(__name__)
-CORS(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mining.sqlite'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
 
-@app.route("/")
-def hello_world():
-    return "<p>Welcome To Batoshi!</p>"
-  
-# Route for seeing a data
-@app.route("/data")
-def get_time():
-  
-    # Returning an api for showing in  reactjs
-    return {
-        "ID" : "001",
-        "Model":"Antminer S19 Pro", 
-        "HashRate":"110T",
-        "Power":"3450W", 
-        "InstalledDate":"09/01/2022"
-        }
+@app.route('/')
+def hello_word():
+    return 'Hello Word!'
 
-@app.route("/api", methods = ['GET'])
-def index():
-    return {
-        'name':'Hello World'
-    }
+@app.cli.command()
+def create():
+    db.drop_all()
+    db.create_all()
+    Mining.init_db()
 
-
-if __name__ =='__main__':
-    app.run(debug = True)
+if __name__ == '__name__':
+    app.run(debug=True)
