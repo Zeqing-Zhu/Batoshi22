@@ -1,24 +1,25 @@
 from extension import db
 
-class Mining(db.Model):
-    __tablename__ = 'mining'
-    ID = db.Column(db.String(255), primary_key=True, nullable=False)
-    Model = db.Column(db.String(255), nullable=False)
-    HashRate = db.Column(db.String(255), nullable=False)
-    Power = db.Column(db.String(255), nullable=False)
-    InstalledDate = db.Column(db.String(255), nullable=False)
+class Machine(db.Model):
+    __tablename__ = 'machine'
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    model = db.Column(db.String(255), nullable=False)
+    hashrate = db.Column(db.String(255), nullable=False)
+    power = db.Column(db.String(255), nullable=False)
+    installeddate = db.Column(db.String(255), nullable=False)
 
     @staticmethod
     def init_db():
         rets = [
-            ('001', 'Antminer S19 Pro', '110T', '3450W', '09/01/2022')
+            (1, 'Antminer S19 Pro', '110T', '3450W', '09/01/2022'),
+            (2, 'Antminer S31 Pro', '46T', '8790W', '09/01/2022')
         ]
         for ret in rets:
-            mining = Mining()
-            mining.ID = ret[0]
-            mining.Model = ret[1]
-            mining.HashRate = ret[2]
-            mining.Power = ret[3]
-            mining.InstalledDate = ret[4]
-            db.session.add(mining)
+            machine = Machine()
+            machine.id = ret[0]
+            machine.model = ret[1]
+            machine.hashrate = ret[2]
+            machine.power = ret[3]
+            machine.installeddate = ret[4]
+            db.session.add(machine)
         db.session.commit()
