@@ -26,10 +26,13 @@ def get_time():
         "Power":"3450W", 
         "InstalledDate":"09/01/2022"
         }
-  
-'''
-# Running app
-if __name__ == '__main__':
-    app.run(debug=True)
-'''
 
+@app.route("/api", methods = ['GET'])
+def index():
+    return {
+        'name':'Hello World'
+    }
+
+
+if __name__ =='__main__':
+    app.run(debug = True)
