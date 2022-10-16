@@ -101,7 +101,7 @@ class MachineApi(MethodView):
 
 machine_view = MachineApi.as_view('machine_api')
 app.add_url_rule('/machines/', defaults={'machine_id': None}, view_func=machine_view, methods= ['GET', ])
-app.add_url_rule('/machines/', view_func=machine_view, methods= ['POST', ])
+app.add_url_rule('/machines', view_func=machine_view, methods= ['POST', ])
 app.add_url_rule('/machines/<int:machine_id>', view_func=machine_view, methods= ['GET', 'PUT', 'DELETE'])
 
 
