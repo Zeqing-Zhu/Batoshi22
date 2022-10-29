@@ -25,16 +25,21 @@ def create():
 
 
 class MachineApi(MethodView):
-    def get(self, machine_id):
-        if not machine_id:
+    def get(self, machine_minerID):
+        if not machine_minerID:
             machines: [Machine] = Machine.query.all()
             results =[
                 {
-                    'ID': machine.id,
-                    'Model': machine.model,
-                    'HashRate': machine.hashrate,
-                    'Power': machine.power,
-                    'InstalledDate': machine.installeddate
+                    'minerID': machine.minerID,
+                    'brand': machine.brand,
+                    'model': machine.model,
+                    'curStatus': machine.curStatus,
+                    'curPower': machine.curPower,
+                    'curHashRate': machine.curHashRate,
+                    'curPowerRatio': machine.curPowerRatio,
+                    'ratedPower': machine.ratedPower,
+                    'ratedHashRate': machine.ratedHashRate,
+                    'ratedPowerRatio': machine.ratedPowerRatio
                 }for machine in machines
             ]
             return{
@@ -42,27 +47,37 @@ class MachineApi(MethodView):
                 'message': 'Data query succeeded!',
                 'results': results
             }
-        machine: Machine = Machine.query.get(machine_id)
+        machine: Machine = Machine.query.get(machine_minerID)
         return {
             'status': 'success',
             'message': 'Data query succeeded!',
             'results': {
-                'ID': machine.id,
-                'Model': machine.model,
-                'HashRate': machine.hashrate,
-                'Power': machine.power,
-                'InstalledDate': machine.installeddate
+                    'minerID': machine.minerID,
+                    'brand': machine.brand,
+                    'model': machine.model,
+                    'curStatus': machine.curStatus,
+                    'curPower': machine.curPower,
+                    'curHashRate': machine.curHashRate,
+                    'curPowerRatio': machine.curPowerRatio,
+                    'ratedPower': machine.ratedPower,
+                    'ratedHashRate': machine.ratedHashRate,
+                    'ratedPowerRatio': machine.ratedPowerRatio
             }
         }
     
     def post(self):
         form =request.json
         machine = Machine()
-        machine.id = form.get('ID')
-        machine.model = form.get('Model')
-        machine.hashrate = form.get('HashRate')
-        machine.power = form.get('Power')
-        machine.installeddate = form.get('InstalledDate')
+        machine.minerID = form.get('minerID')
+        machine.brand = form.get('brand')
+        machine.model = form.get('model')
+        machine.curStatus = form.get('curStatus')
+        machine.curPower = form.get('curPower')
+        machine.curHashRate = form.get('curHashRate')
+        machine.curPowerRatio = form.get('curPowerRatio')
+        machine.ratedPower = form.get('ratedPower')
+        machine.ratedHashRate = form.get('ratedHashRate')
+        machine.ratedPowerRatio = form.get('ratedPowerRatio')
         db.session.add(machine)
         db.session.commit()
         
@@ -71,8 +86,8 @@ class MachineApi(MethodView):
             'message': 'data add successfully'
         }
 
-    def delete(self, machine_id):
-        machine = Machine.query.get(machine_id)
+    def delete(self, machine_minerID):
+        machine = Machine.query.get(machine_minerID)
         db.session.delete(machine)
         db.session.commit()
 
@@ -81,13 +96,18 @@ class MachineApi(MethodView):
             'message': 'data delete successfully'
         }
     
-    def put(self, machine_id):
-        machine: Machine = Machine.query.get(machine_id)
-        machine.id = request.json.get('ID')
-        machine.model = request.json.get('Model')
-        machine.hashrate = request.json.get('HashRate')
-        machine.power = request.json.get('Power')
-        machine.installeddate = request.json.get('InstalledDate')
+    def put(self, machine_minerID):
+        machine: Machine = Machine.query.get(machine_minerID)
+        machine.minerID = request.json.get('minerID')
+        machine.brand = request.json.get('brand')
+        machine.model = request.json.get('model')
+        machine.curStatus = request.json.get('curStatus')
+        machine.curPower = request.json.get('curPower')
+        machine.curHashRate = request.json.get('curHashRate')
+        machine.curPowerRatio = request.json.get('curPowerRatio')
+        machine.ratedPower = request.json.get('ratedPower')
+        machine.ratedHashRate = request.json.get('ratedHashRate')
+        machine.ratedPowerRatio = request.json.get('ratedPowerRatio')
         db.session.commit()
         return {
             'status': 'success',
@@ -100,9 +120,9 @@ class MachineApi(MethodView):
 
 
 machine_view = MachineApi.as_view('machine_api')
-app.add_url_rule('/machines/', defaults={'machine_id': None}, view_func=machine_view, methods= ['GET', ])
+app.add_url_rule('/machines/', defaults={'machine_minerID': None}, view_func=machine_view, methods= ['GET', ])
 app.add_url_rule('/machines', view_func=machine_view, methods= ['POST', ])
-app.add_url_rule('/machines/<int:machine_id>', view_func=machine_view, methods= ['GET', 'PUT', 'DELETE'])
+app.add_url_rule('/machines/<int:machine_minerID>', view_func=machine_view, methods= ['GET', 'PUT', 'DELETE'])
 
 
 if __name__ == '__main__':
