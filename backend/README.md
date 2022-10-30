@@ -1,22 +1,18 @@
 # API:
-GET: url:http://127.0.0.1:5000/machines/<int:machine_id> .
+GET: url: http://127.0.0.1:5000/machines/<int:machine_id> .
 (Get all data if no ID, http://127.0.0.1:5000/machines/).
     
-    
-    
-![141665944733_ pic](https://user-images.githubusercontent.com/80114925/196057443-0ccab5bc-40d6-423d-9840-a0566a19f671.jpg)
-![131665944656_ pic](https://user-images.githubusercontent.com/80114925/196057445-c216f6bc-ea20-4878-948a-acb07dd83a20.jpg)
-
-
+![1](https://user-images.githubusercontent.com/80114925/198859127-cdb80a3b-bd29-4ebc-8461-a60610c2daad.png)
 
 POST: http://127.0.0.1:5000/machines .
 (PS:There is no / after "machine").
     
-![121665944579_ pic](https://user-images.githubusercontent.com/80114925/196057561-3f44b6ae-38f0-4165-b8db-12351bf09265.jpg)
+![2](https://user-images.githubusercontent.com/80114925/198859131-9a69501a-4669-410c-8426-9a22553c84b1.png)
 
-
-PUT: url:http://127.0.0.1:5000/machines/<int:machine_id> .
+PUT: http://127.0.0.1:5000/machines/<int:machine_id> .
     
+![3](https://user-images.githubusercontent.com/80114925/198859140-1967aff6-afb5-42c4-9d30-cf017292a9bc.png)
 
+DELETE: http://127.0.0.1:5000/machines/<int:machine_id> .
 
-DELETE: url:http://127.0.0.1:5000/machines/<int:machine_id> .
+![4](https://user-images.githubusercontent.com/80114925/198859143-e2600eec-c869-4061-833e-0d468bc5a3bb.png)

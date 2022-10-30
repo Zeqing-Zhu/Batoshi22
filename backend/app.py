@@ -33,6 +33,7 @@ class MachineApi(MethodView):
                     'minerID': machine.minerID,
                     'brand': machine.brand,
                     'model': machine.model,
+                    'monitoringTime': machine.monitoringTime,
                     'curStatus': machine.curStatus,
                     'curPower': machine.curPower,
                     'curHashRate': machine.curHashRate,
@@ -55,6 +56,7 @@ class MachineApi(MethodView):
                     'minerID': machine.minerID,
                     'brand': machine.brand,
                     'model': machine.model,
+                    'monitoringTime': machine.monitoringTime,
                     'curStatus': machine.curStatus,
                     'curPower': machine.curPower,
                     'curHashRate': machine.curHashRate,
@@ -71,6 +73,7 @@ class MachineApi(MethodView):
         machine.minerID = form.get('minerID')
         machine.brand = form.get('brand')
         machine.model = form.get('model')
+        machine.monitoringTime = form.get('monitoringTime')
         machine.curStatus = form.get('curStatus')
         machine.curPower = form.get('curPower')
         machine.curHashRate = form.get('curHashRate')
@@ -101,6 +104,7 @@ class MachineApi(MethodView):
         machine.minerID = request.json.get('minerID')
         machine.brand = request.json.get('brand')
         machine.model = request.json.get('model')
+        machine.monitoringTime = request.json.get('monitoringTime')
         machine.curStatus = request.json.get('curStatus')
         machine.curPower = request.json.get('curPower')
         machine.curHashRate = request.json.get('curHashRate')
