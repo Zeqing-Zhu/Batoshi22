@@ -11,6 +11,22 @@ const Widget = ({ type }) => {
   //temporary
   const amount = 99.11;
   const diff = 20;
+  const curTotalMws = 15;
+  /*
+  {
+                    'minerID': machine.minerID,
+                    'brand': machine.brand,
+                    'model': machine.model,
+                    'monitoringTime': machine.monitoringTime,
+                    'curStatus': machine.curStatus,
+                    'curPower': machine.curPower,
+                    'curHashRate': machine.curHashRate,
+                    'curPowerRatio': machine.curPowerRatio,
+                    'ratedPower': machine.ratedPower,
+                    'ratedHashRate': machine.ratedHashRate,
+                    'ratedPowerRatio': machine.ratedPowerRatio
+  }
+*/
 
   switch (type) {
     case "user":
@@ -18,6 +34,7 @@ const Widget = ({ type }) => {
         title: "Online Rate",
         isMoney: false,
         link: "Details",
+        amount: "95%",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -34,6 +51,7 @@ const Widget = ({ type }) => {
         title: "Qualified rate",
         isMoney: false,
         link: "Details",
+        amount:"92%",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -50,6 +68,7 @@ const Widget = ({ type }) => {
         title: "Percentage of HashRate",
         isMoney: false,
         link: "Details",
+        amount: "101%",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
@@ -61,8 +80,9 @@ const Widget = ({ type }) => {
     case "balance":
       data = {
         title: "Current MWs",
-        isMoney: false,
+        isMoney: true,
         link: "Details",
+        amount: "45.5MW",
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="icon"
@@ -83,7 +103,7 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount} %
+          {data.isMoney && "="} {data.amount} 
         </span>
         <span className="link">{data.link}</span>
       </div>
