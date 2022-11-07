@@ -12,21 +12,7 @@ const Widget = ({ type }) => {
   const amount = 99.11;
   const diff = 20;
   const curTotalMws = 15;
-  /*
-  {
-                    'minerID': machine.minerID,
-                    'brand': machine.brand,
-                    'model': machine.model,
-                    'monitoringTime': machine.monitoringTime,
-                    'curStatus': machine.curStatus,
-                    'curPower': machine.curPower,
-                    'curHashRate': machine.curHashRate,
-                    'curPowerRatio': machine.curPowerRatio,
-                    'ratedPower': machine.ratedPower,
-                    'ratedHashRate': machine.ratedHashRate,
-                    'ratedPowerRatio': machine.ratedPowerRatio
-  }
-*/
+
 
   switch (type) {
     case "user":

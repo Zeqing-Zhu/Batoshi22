@@ -47,10 +47,12 @@ const Sidebar = () => {
               <span>Miners Monitoring</span>
             </li>
           </Link>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Auto Management</span>
-          </li>
+          <Link to="/automanagement" style={{ textDecoration: "none" }}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Auto Management</span>
+           </li>
+          </Link>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Alarm</span>
