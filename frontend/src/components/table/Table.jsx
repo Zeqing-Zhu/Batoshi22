@@ -7,45 +7,36 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-  /*
-  {
-                    'minerID': machine.minerID,
-                    'brand': machine.brand,
-                    'model': machine.model,
-                    'monitoringTime': machine.monitoringTime,
-                    'curStatus': machine.curStatus,
-                    'curPower': machine.curPower,
-                    'curHashRate': machine.curHashRate,
-                    'curPowerRatio': machine.curPowerRatio,
-                    'ratedPower': machine.ratedPower,
-                    'ratedHashRate': machine.ratedHashRate,
-                    'ratedPowerRatio': machine.ratedPowerRatio
-  }
-*/
-
 const List = () => {
   const rows = [
     {
-      minerID: 1143155,
-      brand: "Bitmain",
-      img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-      model: "S19 Pro",
-      monitoringTime: "10-30-2022 20:00",
-      amount: 1000,
-      curHashRate: "250T/s",
-      curStatus: "Online",
-    },
-    {
-      minerID: 1143155,
-      brand: "Bitmain",
+      minerId: 1,
+      brand: "Antiner",
       img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
       model: "S19 XP",
-      monitoringTime: "10-30-2022 10:00",
-      amount: 1000,
-      curHashRate: "110T/s",
-      curStatus: "Online",
+      monitoringTime: "11/01/2022 13:05",
+      currStatus: "On",
+      currPower: 3000.0,
+      curHashRate: 140.0,
+      curPowerRatio: 20.8 + " J/T",
+      ratedPower: 3000,
+      ratedHashRate: 141.0,
+      ratedPowerRatio: 20.5 + " J/T"
     },
- 
+    {
+      minerId: 2,
+      brand: "Antiner",
+      img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
+      model: "S19",
+      monitoringTime: "11/01/2022 13:10",
+      currStatus: "Off",
+      currPower: 3400,
+      curHashRate: 98.0,
+      curPowerRatio: 31.5 + " J/T",
+      ratedPower: 3250.0,
+      ratedHashRate: 100.0,
+      ratedPowerRatio: 29.5 + " J/T"
+    },
   ];
   return (
     <TableContainer component={Paper} className="table">
@@ -55,19 +46,20 @@ const List = () => {
             <TableCell className="tableCell">Miner ID</TableCell>
             <TableCell className="tableCell">Brand</TableCell>
             <TableCell className="tableCell">Model</TableCell>
-            <TableCell className="tableCell">Total</TableCell>
-            <TableCell className="tableCell">Qualified</TableCell>
-            <TableCell className="tableCell">Offline</TableCell>
-            <TableCell className="tableCell">Abnormal</TableCell>
-            <TableCell className="tableCell">Current Hashrate</TableCell>
-            <TableCell className="tableCell">Last Monitoring Time</TableCell>
-
+            <TableCell className="tableCell">Monitoring Time</TableCell>
+            <TableCell className="tableCell">Cur Status</TableCell>
+            <TableCell className="tableCell">Cur Power</TableCell>
+            <TableCell className="tableCell">Cur Hash Rate</TableCell>
+            <TableCell className="tableCell">Cur Power Ratio</TableCell>
+            <TableCell className="tableCell">Rated Power</TableCell>
+            <TableCell className="tableCell">Rated Hash Rate</TableCell>
+            <TableCell className="tableCell">Rated Power Ratio</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.minerID}>
-              <TableCell className="tableCell">{row.minerID}</TableCell>
+            <TableRow key={row.minerId}>
+              <TableCell className="tableCell">{row.minerId}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
                   <img src={row.img} alt="" className="image" />
@@ -75,14 +67,14 @@ const List = () => {
                 </div>
               </TableCell>
               <TableCell className="tableCell">{row.model}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.amount-50}</TableCell>
-              <TableCell className="tableCell">{row.amount-945}</TableCell>
-              <TableCell className="tableCell">{row.amount-980}</TableCell>
+              <TableCell className="tableCell">{row.monitoringTime}</TableCell>
+              <TableCell className="tableCell"><span className={`currStatus ${row.currStatus}`}>{row.currStatus}</span></TableCell>
+              <TableCell className="tableCell">{row.currPower}</TableCell>
               <TableCell className="tableCell">{row.curHashRate}</TableCell>
-              <TableCell className="tableCell">
-                <span className={`status ${row.monitoringTime}`}>{row.monitoringTime}</span>
-              </TableCell>
+              <TableCell className="tableCell">{row.curPowerRatio}</TableCell>
+              <TableCell className="tableCell">{row.ratedPower}</TableCell>
+              <TableCell className="tableCell">{row.ratedHashRate}</TableCell>
+              <TableCell className="tableCell">{row.ratedPowerRatio}</TableCell>
             </TableRow>
           ))}
         </TableBody>
