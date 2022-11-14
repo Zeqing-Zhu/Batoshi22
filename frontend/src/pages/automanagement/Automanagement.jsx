@@ -13,7 +13,7 @@ const Automanagement = () => {
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
-          <Widget type="user" />
+          <Widget type="currentMws" />
           
         </div>
         <div className="charts">

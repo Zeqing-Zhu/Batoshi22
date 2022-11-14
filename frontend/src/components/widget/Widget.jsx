@@ -63,7 +63,7 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "balance":
+    case "currentMws":
       data = {
         title: "Current MWs",
         isMoney: true,
