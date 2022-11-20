@@ -7,6 +7,8 @@ import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
 
 const Automanagement = () => {
+
+  
   return (
     <div className="home">
       <Sidebar />
