@@ -33,8 +33,8 @@ class FlaskTestAPI(unittest.TestCase):
     # Check if the data post is successful
     def test_post(self):
        test = app.test_client(self)
-        response = test.post('/machines/post/', json=self.data)
-        self.assertEqual(response.status_code, 200)
+       response = test.post('/machines/post/', json=self.data)
+       self.assertEqual(response.status_code, 200)
 
 
 
