@@ -1,8 +1,8 @@
-#Start：
+# Start：
 python app.py
 
-#Database Initialization:
-python create. (used if you changed the structure of the table)
+# Database Initialization:
+flask create  #used if you need to generate a new table or change the structure of the table.
 
 # API:
 GET: url: http://127.0.0.1:5000/machines/<int:machine_id> .
