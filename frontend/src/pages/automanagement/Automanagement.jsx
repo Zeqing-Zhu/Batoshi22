@@ -7,13 +7,15 @@ import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
 
 const Automanagement = () => {
+
+  
   return (
     <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
-          <Widget type="user" />
+          <Widget type="currentMws" />
           
         </div>
         <div className="charts">

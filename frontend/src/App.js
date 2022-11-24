@@ -4,6 +4,7 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import Automanagement from "./pages/automanagement/Automanagement"
+import MinersMonitoring from "./pages/minersMonitoring/MinersMonitoring"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -25,7 +26,7 @@ function App() {
               <Route path=":userId" element={<Single />} />
               <Route
                 path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
+                element={<New inputs={userInputs} title="Add New Miner" />}
               />
             </Route>
             <Route path="products">
@@ -37,6 +38,8 @@ function App() {
               />
             </Route>
             <Route path="automanagement" element={<Automanagement />} />
+            <Route path="minersmonitoring" element={<MinersMonitoring />} />
+           
             
           </Route>
         </Routes>

@@ -1,27 +1,27 @@
 export const userInputs = [
     {
       id: 1,
-      label: "Username",
+      label: "Brand",
       type: "text",
-      placeholder: "john_doe",
+      placeholder: "Bitmain",
     },
     {
       id: 2,
-      label: "Name and surname",
+      label: "Model",
       type: "text",
-      placeholder: "John Doe",
+      placeholder: "S19 XP",
     },
     {
       id: 3,
-      label: "Email",
+      label: "RatedPower",
       type: "mail",
       placeholder: "john_doe@gmail.com",
     },
     {
       id: 4,
-      label: "Phone",
+      label: "RatedHashRate",
       type: "text",
-      placeholder: "+1 234 567 89",
+      placeholder: "141T",
     },
     {
       id: 5,
@@ -30,15 +30,15 @@ export const userInputs = [
     },
     {
       id: 6,
-      label: "Address",
+      label: "AddratedPowerRatio",
       type: "text",
-      placeholder: "Elton St. 216 NewYork",
+      placeholder: "20.8J/T",
     },
     {
       id: 7,
-      label: "Country",
+      label: "MinerId (Optional)",
       type: "text",
-      placeholder: "USA",
+      placeholder: "16",
     },
   ];
   

@@ -6,8 +6,36 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import axios from 'axios';
+import React, { useState, useEffect, Button } from 'react'
 const List = () => {
+
+
+
+  useEffect (() => {
+
+
+    axios.get("http://127.0.0.1:5000/data")
+      .then(response => {
+          
+      
+        
+          console.log('Axios')
+          console.log(response.data)
+        }
+      )
+
+
+      
+
+
+
+  }, [])
+
+
+
+
+
   const rows = [
     {
       minerId: 1,
