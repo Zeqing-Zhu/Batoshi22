@@ -57,7 +57,7 @@ class MachineApi(MethodView):
                 }for machine in machines
             ]
             return{
-                results
+                'results': results
             }
         machine: Machine = Machine.query.get(machine_minerID)
         return {
