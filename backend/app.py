@@ -6,25 +6,12 @@ from models import Machine
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mining.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
-#CORS().init_app(app)
-
-@app.route("/data")
-def get_data():
-    
+CORS().init_app(app)
 
 
-    # Returning an api for showing in  reactjs
-    return {
-        "ID" : "001",
-        "Model":"Antminer S19 Pro", 
-        "HashRate":"110T",
-        "Power":"3450W", 
-        "InstalledDate":"09/01/2022"
-        }
 @app.route('/')
 def hello_world():
     return "hello_world"
@@ -57,6 +44,7 @@ class MachineApi(MethodView):
                 }for machine in machines
             ]
             return{
+
                 'results': results
             }
         machine: Machine = Machine.query.get(machine_minerID)
@@ -135,8 +123,8 @@ class MachineApi(MethodView):
 
 
 machine_view = MachineApi.as_view('machine_api')
-app.add_url_rule('/machines/', defaults={'machine_minerID': None}, view_func=machine_view, methods= ['GET', ])
-app.add_url_rule('/machines', view_func=machine_view, methods= ['POST', ])
+app.add_url_rule('/machines/', defaults={'machine_minerID': None}, view_func=machine_view, methods= ['GET'])
+app.add_url_rule('/machines/post/', view_func=machine_view, methods= ['POST'])
 app.add_url_rule('/machines/<int:machine_minerID>', view_func=machine_view, methods= ['GET', 'PUT', 'DELETE'])
 
 
