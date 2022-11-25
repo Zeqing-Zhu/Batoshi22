@@ -14,7 +14,7 @@ PUT: http://127.0.0.1:5000/machines/<int:machine_id> .
 
 DELETE: http://127.0.0.1:5000/machines/<int:machine_id> .
 
-Turn on N machines: http://127.0.0.1:5000/machines_run/<number>
+Turn on N machines: http://127.0.0.1:5000/machines_run/<str:number>
 
 Turn on all machines: http://127.0.0.1:5000/machines_turn_on_all/
 
