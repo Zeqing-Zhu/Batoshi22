@@ -1,11 +1,6 @@
 from app import app
 import unittest
-from extension import db
-from models import Machine
 
-db.drop_all()
-db.create_all()
-Machine.init_db()
 
 
 
