@@ -1,12 +1,14 @@
-
+import pandas as pd
+from sqlalchemy import create_engine
 from flask import Flask, request
 from flask.views import MethodView
 from extension import db
 from models import Machine
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mining.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.abspath('mining.sqlite3')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 CORS().init_app(app)
@@ -16,13 +18,11 @@ CORS().init_app(app)
 def hello_world():
     return "hello_world"
 
- 
 @app.cli.command()
 def create():
     db.drop_all()
     db.create_all()
     Machine.init_db()
-
 
 class MachineApi(MethodView):
     def get(self, machine_minerID):
@@ -116,17 +116,37 @@ class MachineApi(MethodView):
             'status': 'success',
             'message': 'data edit successfully'
         }
-    
-
-        
-
-
 
 machine_view = MachineApi.as_view('machine_api')
 app.add_url_rule('/machines/', defaults={'machine_minerID': None}, view_func=machine_view, methods= ['GET'])
 app.add_url_rule('/machines/post/', view_func=machine_view, methods= ['POST'])
 app.add_url_rule('/machines/<int:machine_minerID>', view_func=machine_view, methods= ['GET', 'PUT', 'DELETE'])
 
+@app.route('/machines_run/<number>')
+def machines_run(number):
+    db = create_engine('sqlite:///mining.sqlite3')
+    df = pd.read_sql('machine', db).set_index('minerID')
+    df['curStatus'] = df['curStatus'].replace([1], 0)
+    m = df.sample(int(number), replace=False).index
+    df.loc[m, 'curStatus'] = 1
+    df.to_sql('machine', db, if_exists='replace')
+    return 'Run%s' % number
+
+@app.route('/machines_turn_on_all/')
+def machines_turn_on_all():
+    db = create_engine('sqlite:///mining.sqlite3')
+    df = pd.read_sql('machine', db).set_index('minerID')
+    df['curStatus'] = df['curStatus'].replace([0], 1)
+    df.to_sql('machine', db, if_exists='replace')
+    return 'All machines start running'
+
+@app.route('/machines_shut_down/')
+def machines_shut_down():
+    db = create_engine('sqlite:///mining.sqlite3')
+    df = pd.read_sql('machine', db).set_index('minerID')
+    df['curStatus'] = df['curStatus'].replace([1], 0)
+    df.to_sql('machine', db, if_exists='replace')
+    return 'All machines shut down'
 
 if __name__ == '__main__':
     app.run(debug=True)
