@@ -3,7 +3,6 @@ import unittest
 
 
 
-
 class FlaskTestAPI(unittest.TestCase):
 
     # Check if Response is 200
@@ -17,7 +16,6 @@ class FlaskTestAPI(unittest.TestCase):
         test = app.test_client(self)
         response = test.get('/machines/')
         self.assertEqual(response.content_type, "application/json")
-
 
 
 
