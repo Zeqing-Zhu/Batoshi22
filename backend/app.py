@@ -18,7 +18,7 @@ CORS().init_app(app)
 
 @app.route('/')
 def hello_world():
-    return "hello_world"
+    return "Batoshi22_Backend"
 
 @app.cli.command()
 def create():
@@ -127,28 +127,49 @@ app.add_url_rule('/machines/<int:machine_minerID>', view_func=machine_view, meth
 @app.route('/machines_run/<number>')
 def machines_run(number):
     db = create_engine('sqlite:///mining.sqlite3')
-    df = pd.read_sql('machine', db).set_index('minerID')
+    df = pd.read_sql('machine', db)#.set_index('minerID')
     df['curStatus'] = df['curStatus'].replace([1], 0)
-    m = df.sample(int(number), replace=False).index
+    m = df.nlargest(int(number), 'curPowerRatio').index
     df.loc[m, 'curStatus'] = 1
-    df.to_sql('machine', db, if_exists='replace')
+    df.to_sql('machine', db, if_exists='replace', index=False)
     return 'Run%s' % number
 
 @app.route('/machines_turn_on_all/')
 def machines_turn_on_all():
     db = create_engine('sqlite:///mining.sqlite3')
-    df = pd.read_sql('machine', db).set_index('minerID')
+    df = pd.read_sql('machine', db)#.set_index('minerID')
     df['curStatus'] = df['curStatus'].replace([0], 1)
-    df.to_sql('machine', db, if_exists='replace')
+    df.to_sql('machine', db, if_exists='replace', index=False)
     return 'All machines start running'
 
 @app.route('/machines_shut_down/')
 def machines_shut_down():
     db = create_engine('sqlite:///mining.sqlite3')
-    df = pd.read_sql('machine', db).set_index('minerID')
+    df = pd.read_sql('machine', db)#.set_index('minerID')
     df['curStatus'] = df['curStatus'].replace([1], 0)
-    df.to_sql('machine', db, if_exists='replace')
+    df.to_sql('machine', db, if_exists='replace', index=False)
     return 'All machines shut down'
+
+@app.route('/run_by_power/<power>')
+def run_by_power(power):
+    db = create_engine('sqlite:///mining.sqlite3')
+    df = pd.read_sql('machine', db)  # .set_index('minerID')
+    df['curStatus'] = df['curStatus'].replace([1], 0)
+    n = df.sort_values('curPowerRatio', ascending=False)  # .reset_index(drop=False)
+
+    sum = 0
+    ans = []
+    for i in range(len(n)):
+        if sum <= int(power):
+            sum += n['curPower'][i]
+            ans.append(n['minerID'][i])
+    l = len(ans) - 1
+    j = n.reset_index(drop=True)
+    j.loc[:l, 'curStatus'] = 1
+    new_df = j.sort_values('minerID')
+    new_df.set_index('minerID')
+    new_df.to_sql('machine', db, if_exists='replace', index=False)
+    return 'Successfully run!'
 
 if __name__ == '__main__':
     app.run(debug=True)
