@@ -10,18 +10,27 @@ import axios from 'axios';
 import React, { useState, useEffect, Button } from 'react'
 const List = () => {
 
+  const [testrows, setTestrows] = useState([])
+
 
 
   useEffect (() => {
 
 
     axios.get("http://127.0.0.1:5000/data")
-      .then(response => {
+      .then(kkk => {
           
       
         
-          console.log('Axios')
-          console.log(response.data)
+          //console.log('Axios')
+          //console.log(typeof(kkk.data),".data")
+          //console.log(kkk.data)
+          //console.log(kkk.data.results,".result")
+          //console.log(typeof(kkk.data.results))
+          setTestrows(kkk.data.results)
+          //console.log(testrows,".testrows")
+        
+
         }
       )
 
@@ -33,7 +42,7 @@ const List = () => {
   }, [])
 
 
-
+  
 
 
   const rows = [
@@ -65,7 +74,9 @@ const List = () => {
       ratedHashRate: 100.0,
       ratedPowerRatio: 29.5 + " J/T"
     },
+    
   ];
+
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -85,9 +96,9 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {testrows.map((row) => (
             <TableRow key={row.minerId}>
-              <TableCell className="tableCell">{row.minerId}</TableCell>
+              <TableCell className="tableCell">{row.minerID}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
                   <img src={row.img} alt="" className="image" />
@@ -96,8 +107,8 @@ const List = () => {
               </TableCell>
               <TableCell className="tableCell">{row.model}</TableCell>
               <TableCell className="tableCell">{row.monitoringTime}</TableCell>
-              <TableCell className="tableCell"><span className={`currStatus ${row.currStatus}`}>{row.currStatus}</span></TableCell>
-              <TableCell className="tableCell">{row.currPower}</TableCell>
+              <TableCell className="tableCell"><span className={`currStatus ${row.curStatus}`}>{row.curStatus}</span></TableCell>
+              <TableCell className="tableCell">{row.curPower}</TableCell>
               <TableCell className="tableCell">{row.curHashRate}</TableCell>
               <TableCell className="tableCell">{row.curPowerRatio}</TableCell>
               <TableCell className="tableCell">{row.ratedPower}</TableCell>
