@@ -171,5 +171,13 @@ def run_by_power(power):
     new_df.to_sql('machine', db, if_exists='replace', index=False)
     return 'Successfully run!'
 
+@app.route('/total_curpower/')
+def total_curpower():
+    db = create_engine('sqlite:///mining.sqlite3')
+    df = pd.read_sql('machine', db)
+    sump = df.loc[df['curStatus'] == 1]
+    sp = sump['curPower'].sum()
+    return str(sp)
+
 if __name__ == '__main__':
     app.run(debug=True)
