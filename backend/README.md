@@ -23,3 +23,9 @@ Turn on all machines: http://127.0.0.1:5000/machines_turn_on_all/
 Shut down all machines: http://127.0.0.1:5000/machines_shut_down/
 
 Turn on N machines according to the current power: http://127.0.0.1:5000/run_by_power/<int:power>
+
+Total power of running machines: http://127.0.0.1:5000/total_curpower/
+
+Running machines as a percentage of total machines: http://127.0.0.1:5000/p_of_r/
+
+Ratio of current hashrate to rated hashrate: http://127.0.0.1:5000/curhash_ratedhash/
