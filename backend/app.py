@@ -155,19 +155,20 @@ def run_by_power(power):
     db = create_engine('sqlite:///mining.sqlite3')
     df = pd.read_sql('machine', db)  # .set_index('minerID')
     df['curStatus'] = df['curStatus'].replace([1], 0)
-    n = df.sort_values('curPowerRatio', ascending=False)  # .reset_index(drop=False)
+    n = df.sort_values('curPowerRatio', ascending=False).reset_index(drop=True)
 
     sum = 0
     ans = []
     for i in range(len(n)):
+        sum += n['curPower'][i]
         if sum <= int(power):
-            sum += n['curPower'][i]
-            ans.append(n['minerID'][i])
-    l = len(ans) - 1
-    j = n.reset_index(drop=True)
-    j.loc[:l, 'curStatus'] = 1
-    new_df = j.sort_values('minerID')
-    new_df.set_index('minerID')
+            save = sum
+            ans.append(n.index[i])
+        else:
+            sum = save
+
+    n.loc[n.index.isin(ans), 'curStatus'] =1
+    new_df = n.sort_values('minerID').reset_index(drop=True)
     new_df.to_sql('machine', db, if_exists='replace', index=False)
     return 'Successfully run!'
 
@@ -178,6 +179,24 @@ def total_curpower():
     sump = df.loc[df['curStatus'] == 1]
     sp = sump['curPower'].sum()
     return str(sp)
+@app.route('/p_of_r/')
+def p_of_r():
+    db = create_engine('sqlite:///mining.sqlite3')
+    df = pd.read_sql('machine', db)
+    tm = df['minerID'].count()
+    cm = df['minerID'].loc[df['curStatus'] == 1].count()
+    pm = cm / tm
+    return str(pm)
+
+@app.route('/curhash_ratedhash/')
+def curhash_ratedhash():
+    db = create_engine('sqlite:///mining.sqlite3')
+    df = pd.read_sql('machine', db)
+    ch = df.loc[df['curStatus'] == 1]
+    sch = ch['curHashRate'].sum()
+    srh = ch['ratedHashRate'].sum()
+    ph = sch/srh
+    return str(ph)
 
 if __name__ == '__main__':
     app.run(debug=True)
