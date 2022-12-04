@@ -3,22 +3,14 @@ import axios from 'axios';
 
 export const SubmitCapacity = () => {
 
-    const [MiningRigID, setMiningRigID] = useState ("")
-    const [MiningRigModel, setMiningRigModel] = useState ("")
-    const [MiningRigHashRate, setMiningRigHashRate] = useState ("")
-    const [MiningRigPower, setMiningRigPower] = useState ("")
-    const [MiningRigInstalledDate, setMiningRigInstalledDate] = useState ("")
+ 
     const [curAvailableCapacity, setCurAvailableCapacity] = useState ("")
 
 
 
     var MingRigSubmisiionData = {
 
-        "ID": MiningRigID, 
-        "HashRate": MiningRigModel, 
-        "InstalledDate": MiningRigHashRate, 
-        "Model": MiningRigPower, 
-        "Power": MiningRigInstalledDate,
+
         "CurAvailableCapacity" : curAvailableCapacity
     
     }
