@@ -35,10 +35,10 @@ const Sidebar = () => {
           </li>
           </Link>
           <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <Link to="/manageroverride" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Site Overview</span>
+              <span>Manager Override</span>
             </li>
           </Link>
           <Link to="/minersMonitoring" style={{ textDecoration: "none" }}>

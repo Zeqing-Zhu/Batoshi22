@@ -5,6 +5,7 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import Automanagement from "./pages/automanagement/Automanagement"
 import MinersMonitoring from "./pages/minersMonitoring/MinersMonitoring"
+import Manageroverride from "./pages/manageroverride/Manageroverride"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -39,6 +40,7 @@ function App() {
             </Route>
             <Route path="automanagement" element={<Automanagement />} />
             <Route path="minersmonitoring" element={<MinersMonitoring />} />
+            <Route path="manageroverride" element={<Manageroverride />} />
            
             
           </Route>

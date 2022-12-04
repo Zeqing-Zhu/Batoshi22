@@ -101,7 +101,7 @@ const List = () => {
               <TableCell className="tableCell">{row.minerID}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
+                  <img src={"https://m.media-amazon.com/images/I/61DUyouezEL._AC_SL1430_.jpg"} alt="" className="image" />
                   {row.brand}
                 </div>
               </TableCell>
