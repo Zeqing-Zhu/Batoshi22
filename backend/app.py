@@ -165,7 +165,7 @@ def run_by_power(power):
             save = sum
             ans.append(n.index[i])
         else:
-            sum = save
+            sum = sum
 
     n.loc[n.index.isin(ans), 'curStatus'] =1
     new_df = n.sort_values('minerID').reset_index(drop=True)

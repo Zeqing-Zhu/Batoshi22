@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export const SubmitCapacity = () => {
+export const EmergencyOnOff = () => {
 
  
     const [curAvailableCapacity, setCurAvailableCapacity] = useState ("")
@@ -18,10 +18,10 @@ export const SubmitCapacity = () => {
     var apiToCall = "http://127.0.0.1:5000/run_by_power/"+curAvailableCapacity.toString();
 
 
-    function submitAvailableCapacity(){
+    function shutdownall(){
         
 
-        axios.get(apiToCall)
+        axios.get("http://127.0.0.1:5000/machines_shut_down/")
         .then(res => {
             
         
@@ -33,7 +33,7 @@ export const SubmitCapacity = () => {
             //console.log(typeof(kkk.data.results))
            
             //console.log(testrows,".testrows")
-            alert (curAvailableCapacity+"Submit successful!" + apiToCall)
+            alert ("Shuting Down All Rigs !" )
           
   
           }
@@ -44,6 +44,30 @@ export const SubmitCapacity = () => {
       
 
     }
+
+    function turnonallrigs(){
+        
+
+        axios.get("http://127.0.0.1:5000/machines_turn_on_all/")
+        .then(res => {
+            
+        
+          
+            //console.log('Axios')
+            //console.log(typeof(kkk.data),".data")
+            //console.log(kkk.data)
+            //console.log(kkk.data.results,".result")
+            //console.log(typeof(kkk.data.results))
+           
+            //console.log(testrows,".testrows")
+            alert ("Turning On All Rigs !" )
+          
+  
+          }
+        )
+      
+
+    }
   
 
     
@@ -51,31 +75,25 @@ export const SubmitCapacity = () => {
         <>
             <form>
 
-                <p>  
-                Here are the KWs you will submit:
-                </p>
-                
-               {dataToSend}
+         
                 
                 <br />
                
                 <label>
-                    Current Available Capacity :
+                    Manager Override Dev Mode :
                     
-                    <input
-                        name="curAvailableCapacity"
-                        type="number"
-                        //value={this.state.numberOfGuests}
-                        //onChange={this.handleInputChange} 
-                        onChange={(e) => setCurAvailableCapacity(e.target.value*1000)}
-            
-                        />
+                  
                 </label>
                 <br />
                 
                 <button 
-                    onClick={submitAvailableCapacity}
-                    >Submit Available Capacity</button>
+                    onClick={shutdownall}
+                    >Shut Down All Rigs</button>
+                    <br />
+                    <br />
+                    <button 
+                    onClick={turnonallrigs}
+                    >Turn On All Rigs</button>
             </form>
         </>
     )
