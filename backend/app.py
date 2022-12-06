@@ -158,6 +158,7 @@ def run_by_power(power):
     n = df.sort_values('curPowerRatio', ascending=False).reset_index(drop=True)
 
     sum = 0
+    save = 0 
     ans = []
     for i in range(len(n)):
         sum += n['curPower'][i]
@@ -165,7 +166,7 @@ def run_by_power(power):
             save = sum
             ans.append(n.index[i])
         else:
-            sum = sum
+            sum = save
 
     n.loc[n.index.isin(ans), 'curStatus'] =1
     new_df = n.sort_values('minerID').reset_index(drop=True)
