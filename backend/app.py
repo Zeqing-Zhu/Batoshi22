@@ -159,6 +159,7 @@ def run_by_power(power):
 
     sum = 0
     save = 0 
+
     ans = []
     for i in range(len(n)):
         sum += n['curPower'][i]
