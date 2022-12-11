@@ -163,7 +163,7 @@ def run_by_power(power):
     ans = []
     for i in range(len(n)):
         sum += n['curPower'][i]
-        if sum <= int(power):
+        if sum <= float(power):
             save = sum
             ans.append(n.index[i])
         else:
